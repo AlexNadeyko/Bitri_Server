@@ -30,8 +30,12 @@ public class ServerManager implements Runnable {
 
         BasicMessage message = null;
 
-        try(ObjectInputStream ois = new ObjectInputStream(socketClient.getInputStream()) ){
+//        try(ObjectInputStream ois = new ObjectInputStream(socketClient.getInputStream()) ){
+        try{
+            /////!!!!!
+            ObjectInputStream ois = new ObjectInputStream(socketClient.getInputStream());
 
+            ////////!!!
             message = (BasicMessage) ois.readObject();
             //
             System.out.println(message.getTypeOfInnerMessage());
