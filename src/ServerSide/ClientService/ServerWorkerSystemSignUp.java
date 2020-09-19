@@ -75,17 +75,17 @@ public class ServerWorkerSystemSignUp implements Runnable{
             ResultSet resultQuery = preparedStatement.executeQuery();
 
             ////
-            System.out.println("***select users's login from table users***");
+            System.out.println("***Server/ServerWorkerSystemSignUp: select users's login from table users***");
             ///
 
             if(resultQuery.next()) {
                 ////
-                System.out.println("***database: such login exists***");
+                System.out.println("***Server/ServerWorkerSystemSignUp: such login exists***");
                 ////
                 return true;
             }else {
                 ////
-                System.out.println("***database: such login does not exist***");
+                System.out.println("***Server/ServerWorkerSystemSignUp: such login does not exist***");
                 ////
             }
 
@@ -124,7 +124,7 @@ public class ServerWorkerSystemSignUp implements Runnable{
             preparedStatement.executeUpdate();
 
             ////
-            System.out.println("***insert data to table users***");
+            System.out.println("***Server/ServerWorkerSystemSignUp: insert data to table users***");
             ///
 
         }catch (SQLException e) {

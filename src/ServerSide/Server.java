@@ -15,11 +15,11 @@ public class Server {
     }
 
     public void initialize(){
+        ///
+        System.out.println("***Server/Server: initialization***");
+        ///
         createDirectoryApp();
         createDatabase();
-        ///
-        System.out.println("***Server initialize***");
-        //
     }
 
     public void start(){
@@ -59,7 +59,7 @@ public class Server {
 
         try(Connection databaseConnection = DriverManager.getConnection("jdbc:sqlite:" + databasePath + File.separator + "bitriDB.db")){
             if(databaseConnection != null){
-                System.out.println("***Database has been created.***");
+                System.out.println("***Server/Server: database has been created.***");
             }
 
         } catch(SQLException e) {
@@ -81,7 +81,7 @@ public class Server {
         try (Connection databaseConnection = DriverManager.getConnection(ServerResources.URL_SQLITE_DATABASE);
              Statement statement = databaseConnection.createStatement()){
             statement.execute(sqlCreateTableUsers);
-            System.out.println("***Table users was created***");
+            System.out.println("***Server/Server: table users was created in database***");
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }

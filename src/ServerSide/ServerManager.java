@@ -2,6 +2,8 @@ package ServerSide;
 
 import MessagesClientServer.BasicMessage;
 import MessagesClientServer.InnerMessageSystemAddUserSignUp;
+import MessagesClientServer.InnerMessageSystemExistUserLogin;
+import ServerSide.ClientService.ServerWorkerSystemLogin;
 import ServerSide.ClientService.ServerWorkerSystemSignUp;
 
 import java.io.IOException;
@@ -30,16 +32,12 @@ public class ServerManager implements Runnable {
 
         BasicMessage message = null;
 
-//        try(ObjectInputStream ois = new ObjectInputStream(socketClient.getInputStream()) ){
         try{
-            /////!!!!!
             ObjectInputStream ois = new ObjectInputStream(socketClient.getInputStream());
-
-            ////////!!!
             message = (BasicMessage) ois.readObject();
-            //
-            System.out.println(message.getTypeOfInnerMessage());
-            //
+            ///
+            System.out.println("Server/ServerManager: get message with type = " + message.getTypeOfInnerMessage());
+            ///
         }catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -55,6 +53,8 @@ public class ServerManager implements Runnable {
 
                 break;
             case EXIST_USER_LOGIN:
+                new Thread(new ServerWorkerSystemLogin(socketClient,
+                        (InnerMessageSystemExistUserLogin) message.getInnerMessage())).start();
                 break;
         }
     }
